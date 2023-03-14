@@ -24,7 +24,7 @@ public class yürüme : MonoBehaviour
         {
             if (yerdeMi)
             {
-                rb.AddForce(Vector3.up * ziplamaGucu * 250 * Time.deltaTime, ForceMode.Impulse);
+                rb.AddForce(Vector3.up * ziplamaGucu, ForceMode.Impulse);
             }
         }
     }
