@@ -30,7 +30,7 @@ public class buton_plaka : MonoBehaviour
     {
         if (asd)
         {
-            if (transform.position.y < 0.6f)
+            if (transform.position.y < 22.5f)
             {
                 rb.AddForce(0, 1, 0 * speed, ForceMode.Impulse);
             }
