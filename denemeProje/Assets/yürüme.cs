@@ -39,12 +39,16 @@ public class yürüme : MonoBehaviour
     public float hiz;
     public float ziplamaGucu;
     bool yerdeMi;
+    public string layerToIgnore = "Oyuncu"; // Set the layer to ignore collisions with here
+
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-    }
 
+        int layerToIgnoreIndex = LayerMask.NameToLayer(layerToIgnore);
+        Physics.IgnoreLayerCollision(layerToIgnoreIndex, layerToIgnoreIndex);
+    }
     private void Update()
     {
         float hareket = Input.GetAxis("Horizontal") * hiz;
