@@ -65,7 +65,7 @@ public class yürüme : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.tag == "platform")
+        if (collision.gameObject.layer == 6)
         {
             yerdeMi = true;
         }
@@ -73,7 +73,7 @@ public class yürüme : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.tag == "platform")
+        if (collision.gameObject.layer == 6)
         {
             yerdeMi = false;
         }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1329240459163785411}
   - component: {fileID: 1329240459163785410}
   - component: {fileID: 1329240459163785468}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: buton_alt
   m_TagString: Untagged
   m_Icon: {fileID: 0}

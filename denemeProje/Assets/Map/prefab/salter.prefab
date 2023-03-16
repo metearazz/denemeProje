@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2970939313088972168}
   m_Layer: 0
   m_Name: salter
-  m_TagString: Untagged
+  m_TagString: platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -91,6 +91,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: salter_govde
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a5df83a176a5dde42bdaeb1150cb4039, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5df83a176a5dde42bdaeb1150cb4039, type: 3}
 --- !u!1 &3669735401685990116 stripped
@@ -114,6 +118,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!65 &1399178976
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3669735401685990116}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.010978869, y: 0.0073192464, z: 0.0046257176}
+  m_Center: {x: 1.5862675e-19, y: -0.000000007470567, z: 0.00016765064}
 --- !u!4 &4154100387522764894 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a5df83a176a5dde42bdaeb1150cb4039, type: 3}
