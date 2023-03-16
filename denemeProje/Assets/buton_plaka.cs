@@ -18,11 +18,14 @@ public class buton_plaka : MonoBehaviour
     {
         yukari();
     }
-
+    private void OnCollisionEnter(Collision collision)
+    {
+        asd= false;
+    }
 
     private void OnCollisionExit(Collision collision)
     {
-        print("bum");
+       
         asd = true;
     }
 
@@ -30,9 +33,9 @@ public class buton_plaka : MonoBehaviour
     {
         if (asd)
         {
-            if (transform.position.y < 22.5f)
+            if (transform.position.y < 22f)
             {
-                rb.AddForce(0, 1, 0 * speed, ForceMode.Impulse);
+                transform.Translate(0, 0, 1 * Time.deltaTime);
             }
         }
     }
