@@ -35,6 +35,12 @@ using UnityEngine;
 
 public class yürüme : MonoBehaviour
 {
+    public static yürüme instance;
+
+    public bool isDead = false;
+
+    bool sagBak;
+
     public GameObject smokePrefab; // Duman efekti için ön tanımlı bir prefab
     public float smokeDuration = 0.3f; // Duman efektinin ne kadar süreceği
     Rigidbody rb;
@@ -43,6 +49,12 @@ public class yürüme : MonoBehaviour
     bool yerdeMi;
     public string layerToIgnore = "Oyuncu"; // Set the layer to ignore collisions with here
 
+    public Animator animator2;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
@@ -59,6 +71,33 @@ public class yürüme : MonoBehaviour
 
         rb.velocity = new Vector3(hareketVektoru.x, rb.velocity.y, 0); // karakteri hareket ettir
 
+        #region Karakter çevirme 
+
+        if (hareket < 0 && !sagBak)
+        {
+            Rotate();
+        }
+
+        if (hareket > 0 && sagBak)
+        {
+            Rotate();
+        }
+        #endregion
+
+        #region Animasyon
+
+        if (hareket > 0 || hareket < 0)
+        {
+            animator2.SetBool("isRunning", true);
+        }
+
+        else
+        {
+            animator2.SetBool("isRunning", false);
+        }
+        #endregion
+
+        #region Zıplama
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             if (yerdeMi)
@@ -67,7 +106,18 @@ public class yürüme : MonoBehaviour
                 yerdeMi = false; // karakterin havada olduğunu işaretle
             }
         }
+        #endregion
     }
+
+    void Rotate()
+    {
+        sagBak = !sagBak;
+        Vector3 localScale = transform.localScale;
+        localScale.x *= -1f;
+        transform.localScale = localScale;
+
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name == "Su" || other.gameObject.name == "Zehir")
@@ -78,6 +128,7 @@ public class yürüme : MonoBehaviour
             Destroy(smoke, smokeDuration);
             print("Ateş Yandı");
             Destroy(gameObject);
+            isDead = true;
 
             //Time.timeScale = 0;
         }
