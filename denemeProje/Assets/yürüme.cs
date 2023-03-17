@@ -35,6 +35,8 @@ using UnityEngine;
 
 public class yürüme : MonoBehaviour
 {
+    public GameObject smokePrefab; // Duman efekti için ön tanımlı bir prefab
+    public float smokeDuration = 0.3f; // Duman efektinin ne kadar süreceği
     Rigidbody rb;
     public float hiz;
     public float ziplamaGucu;
@@ -64,6 +66,25 @@ public class yürüme : MonoBehaviour
                 rb.AddForce(Vector3.up * ziplamaGucu, ForceMode.Impulse);
                 yerdeMi = false; // karakterin havada olduğunu işaretle
             }
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "Su" || other.gameObject.name == "Zehir")
+        {
+            GameObject smoke = Instantiate(smokePrefab, transform.position, Quaternion.identity);
+
+            // Duman efekti belirtilen süre boyunca kalacak
+            Destroy(smoke, smokeDuration);
+            print("Ateş Yandı");
+            Destroy(gameObject);
+
+            //Time.timeScale = 0;
+        }
+        if (other.gameObject.tag == "KirmiziElmas")
+        {
+            print("girdi");
+            Destroy(other.gameObject);
         }
     }
 

@@ -1,18 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class yürümeSu : MonoBehaviour
 {
+    public GameObject smokePrefab; // Duman efekti için ön tanımlı bir prefab
+    public float smokeDuration; // Duman efektinin ne kadar süreceği
     Rigidbody rb;
     public float hiz;
     public float ziplamaGucu;
     bool yerdeMi;
     public string layerToIgnore = "Oyuncu"; // Set the layer to ignore collisions with here
-
-   
-      
-    
 
     private void Start()
     {
@@ -39,6 +38,24 @@ public class yürümeSu : MonoBehaviour
             }
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "Ates" || other.gameObject.name == "Zehir")
+        {
+            GameObject smoke = Instantiate(smokePrefab, transform.position, Quaternion.identity);
+
+            // Duman efekti belirtilen süre boyunca kalacak
+            Destroy(smoke, smokeDuration);
+            print("Su Yandı");
+            Destroy(gameObject);
+            //Time.timeScale = 0;
+        }
+        if (other.gameObject.tag == "MaviElmas")
+        {
+            print("girdi");
+            Destroy(other.gameObject);
+        }
+    }
 
     private void OnCollisionStay(Collision collision)
     {
@@ -55,4 +72,5 @@ public class yürümeSu : MonoBehaviour
             yerdeMi = false;
         }
     }
+
 }
