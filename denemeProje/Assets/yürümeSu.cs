@@ -5,21 +5,25 @@ using UnityEngine;
 
 public class yürümeSu : MonoBehaviour
 {
+    public Animator animator;
+
     public static yürümeSu instance;
 
     public bool isDead = false;
-    
+
     bool sagBak;
 
-    public Animator animator;
+    public GameObject smokePrefab;
 
-    public GameObject smokePrefab; // Duman efekti için ön tanımlı bir prefab
-    public float smokeDuration; // Duman efektinin ne kadar süreceği
+    public float smokeDuration;
+
     Rigidbody rb;
     public float hiz;
     public float ziplamaGucu;
     bool yerdeMi;
-    public string layerToIgnore = "Oyuncu"; // Set the layer to ignore collisions with here
+
+
+    public string layerToIgnore = "Oyuncu";
 
     private void Awake()
     {
@@ -38,39 +42,37 @@ public class yürümeSu : MonoBehaviour
     private void Update()
     {
         float hareket = Input.GetAxis("Vertical") * hiz;
+
         Vector3 hareketVektoru = new Vector3(hareket, 0, 0);
-        hareketVektoru = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0) * hareketVektoru; // hareket vektörünü karakterin yönüne dönüştür
 
-        rb.velocity = new Vector3(hareketVektoru.x, rb.velocity.y, 0); // karakteri hareket ettir
+        // hareket vektörünü karakterin yönüne dönüştür
+        hareketVektoru = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0) * hareketVektoru;
 
+        // karakteri hareket ettir
+        rb.velocity = new Vector3(hareketVektoru.x, rb.velocity.y, 0);
 
         #region Karakter çevirme 
 
         if (hareket < 0 && !sagBak)
-        {
             Rotate();
-        }
 
         if (hareket > 0 && sagBak)
-        {
             Rotate();
-        }
+
         #endregion
 
         #region Animasyon
 
         if (hareket > 0 || hareket < 0)
-        {
-            animator.SetBool("run", true);
-        }
+        animator.SetBool("run", true);
 
         else
-        {
-            animator.SetBool("run", false);
-        }
+        animator.SetBool("run", false);
+
         #endregion
 
         #region Zıplama
+
         if (Input.GetKeyDown(KeyCode.W))
         {
             if (yerdeMi)
@@ -79,7 +81,9 @@ public class yürümeSu : MonoBehaviour
                 yerdeMi = false; // karakterin havada olduğunu işaretle
             }
         }
+
         #endregion
+
     }
 
     void Rotate()
@@ -101,12 +105,12 @@ public class yürümeSu : MonoBehaviour
             Destroy(smoke, smokeDuration);
             print("Su Yandı");
             Destroy(gameObject);
-            //Time.timeScale = 0;
+    
             isDead = true;
         }
         if (other.gameObject.tag == "MaviElmas")
         {
-            print("girdi");
+           
             Destroy(other.gameObject);
         }
     }
